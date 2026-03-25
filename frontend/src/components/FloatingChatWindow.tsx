@@ -28,7 +28,7 @@ export default function FloatingChatWindow({ offerId, minimized }: { offerId: nu
     }
     
     // Fetch historical messages
-    fetch(`http://localhost:8000/chat/${offerId}/messages`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/chat/${offerId}/messages`)
       .then(res => res.json())
       .then(data => {
          if (Array.isArray(data)) setMessages(data);
@@ -39,7 +39,7 @@ export default function FloatingChatWindow({ offerId, minimized }: { offerId: nu
   useEffect(() => {
     if (user && !isLoading) {
       const token = localStorage.getItem("token");
-      const ws = new WebSocket(`ws://localhost:8000/chat/ws/${offerId}/${user.id}?token=${token}`);
+      const ws = new WebSocket(`${process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000'}/chat/ws/${offerId}/${user.id}?token=${token}`);
       ws.onmessage = (event) => {
          try {
            const incomingMsg = JSON.parse(event.data);

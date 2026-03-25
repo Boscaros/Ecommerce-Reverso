@@ -55,7 +55,7 @@ export default function Login() {
             phone_number: rawPhone
         };
 
-        const res = await fetch("http://localhost:8000/users/", {
+        const res = await fetch((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000') + "/users/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
@@ -74,7 +74,7 @@ export default function Login() {
         window.location.href = "/verify"; // Redireciona para confirmar e-mail
       } else {
         // Mock Login
-        const res = await fetch("http://localhost:8000/users/login", {
+        const res = await fetch((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000') + "/users/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),

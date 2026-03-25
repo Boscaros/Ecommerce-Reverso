@@ -32,7 +32,7 @@ export default function MyOffers() {
     }
     const user = JSON.parse(userStr);
 
-    fetch(`http://localhost:8000/offers/user/${user.id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/offers/user/${user.id}`)
       .then(res => res.json())
       .then(data => {
         setOffers(data);

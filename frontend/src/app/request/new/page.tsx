@@ -28,7 +28,7 @@ export default function NewRequest() {
     const target_price_cents = Math.round(parseFloat(price.replace(",", ".")) * 100);
 
     try {
-      const res = await fetch(`http://localhost:8000/requests/?user_id=${user.id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/requests/?user_id=${user.id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
          body: JSON.stringify({ 

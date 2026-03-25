@@ -33,7 +33,7 @@ export default function VerifyEmail() {
     if (!userId) return;
 
     try {
-      const res = await fetch(`http://localhost:8000/users/${userId}/verify`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/users/${userId}/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ verification_code: code }),

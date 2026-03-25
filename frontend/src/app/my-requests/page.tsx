@@ -28,7 +28,7 @@ export default function MyRequests() {
     }
     const user = JSON.parse(userStr);
 
-    fetch(`http://localhost:8000/requests/user/${user.id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/requests/user/${user.id}`)
       .then(res => res.json())
       .then(data => {
         setRequests(data);

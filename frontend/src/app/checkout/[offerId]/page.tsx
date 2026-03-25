@@ -11,7 +11,7 @@ export default function CheckoutPage() {
   const [isProcessing, setIsProcessing] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/offers/${offerId}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/offers/${offerId}`)
       .then(res => res.json())
       .then(data => setOffer(data))
       .catch(err => console.error(err))
@@ -24,7 +24,7 @@ export default function CheckoutPage() {
       const token = localStorage.getItem("token");
 
       // 1. Simular intenção de pagamento no backend mock
-      const checkoutRes = await fetch(`http://localhost:8000/offers/${offerId}/checkout`, {
+      const checkoutRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/offers/${offerId}/checkout`, {
         method: "POST",
         headers: { "Authorization": `Bearer ${token}` }
       });
@@ -44,7 +44,7 @@ export default function CheckoutPage() {
       const user = userStr ? JSON.parse(userStr) : null;
 
       // 3. Aceitar a oferta oficialmente no backend
-      const acceptRes = await fetch(`http://localhost:8000/offers/${offerId}/accept?user_id=${user?.id}`, {
+      const acceptRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/offers/${offerId}/accept?user_id=${user?.id}`, {
         method: "PUT",
         headers: { "Authorization": `Bearer ${token}` }
       });

@@ -32,8 +32,8 @@ export default function PublicProfile() {
 
   useEffect(() => {
     Promise.all([
-      fetch(`http://localhost:8000/users/${id}`).then(res => res.json()),
-      fetch(`http://localhost:8000/reviews/user/${id}`).then(res => res.json())
+      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/users/${id}`).then(res => res.json()),
+      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/reviews/user/${id}`).then(res => res.json())
     ])
     .then(([userData, reviewsData]) => {
       setProfile(userData);

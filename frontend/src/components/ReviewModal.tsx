@@ -29,7 +29,7 @@ export default function ReviewModal({ isOpen, onClose, requestId, revieweeId, on
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/reviews/', {
+      const response = await fetch((process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000') + '/reviews/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

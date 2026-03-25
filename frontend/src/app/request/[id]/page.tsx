@@ -58,7 +58,7 @@ export default function RequestDetails() {
     }
     
     // Load Request
-    fetch(`http://localhost:8000/requests/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/requests/${id}`)
       .then(res => res.json())
       .then(data => setRequest(data))
       .catch(err => console.error(err));
@@ -83,7 +83,7 @@ export default function RequestDetails() {
     }
 
     try {
-      const res = await fetch(`http://localhost:8000/offers/`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/offers/`, {
         method: "POST",
         body: formData // No Content-Type header needed for FormData in fetch
       });
@@ -105,7 +105,7 @@ export default function RequestDetails() {
     if (!confirm("Tem certeza que deseja excluir este pedido de forma permanente?")) return;
     
     try {
-      const res = await fetch(`http://localhost:8000/requests/${id}?user_id=${user.id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/requests/${id}?user_id=${user.id}`, {
         method: "DELETE"
       });
       if (res.ok) {
@@ -229,9 +229,9 @@ export default function RequestDetails() {
                 </div>
                 <div className="text-right flex items-center gap-4">
                   {offer.image_url && (
-                     <a href={`http://localhost:8000${offer.image_url}`} target="_blank" rel="noopener noreferrer" className="shrink-0 hover:opacity-80 transition-opacity" title="Clique para ampliar" onClick={(e) => e.stopPropagation()}>
+                     <a href={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${offer.image_url}`} target="_blank" rel="noopener noreferrer" className="shrink-0 hover:opacity-80 transition-opacity" title="Clique para ampliar" onClick={(e) => e.stopPropagation()}>
                          <img 
-                            src={`http://localhost:8000${offer.image_url}`} 
+                            src={`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${offer.image_url}`} 
                             alt="Anexo da oferta"
                             className="w-16 h-16 object-cover rounded-md border border-meli-border shadow-sm"
                          />

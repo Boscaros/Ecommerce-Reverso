@@ -43,7 +43,7 @@ export default function Profile() {
     const user = JSON.parse(userStr);
     
     // Fetch profile
-    fetch(`http://localhost:8000/users/${user.id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/users/${user.id}`)
       .then(res => res.json())
       .then(data => {
         setProfile(data);
@@ -137,7 +137,7 @@ export default function Profile() {
     }
 
     try {
-      const res = await fetch(`http://localhost:8000/users/${profile.id}/profile`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/users/${profile.id}/profile`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
