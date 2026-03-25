@@ -1,0 +1,8 @@
+fastapi[standard]
+SQLAlchemy
+pydantic
+pydantic-settings
+passlib[bcrypt]
+python-jose[cryptography]
+python-multipart
+websockets
