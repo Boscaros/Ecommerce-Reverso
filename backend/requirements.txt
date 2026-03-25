@@ -8,3 +8,4 @@ python-multipart
 websockets
 psycopg2-binary
 python-dotenv
+validate-docbr
